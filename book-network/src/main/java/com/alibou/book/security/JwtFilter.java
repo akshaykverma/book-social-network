@@ -15,7 +15,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
+/*
+Authentication Flow:
+    - Skips authentication for paths containing "/api/v1/auth"
+    - Extracts JWT token from the "Authorization" header
+    - Uses JwtService: Handles JWT operations like extracting username and validating tokens
+    - Validates the token and uses UserDetailsService: Loads user details from the database
+    - Sets authentication in the Spring Security context if token is valid
+    - Uses Spring Security's SecurityContextHolder to manage authentication
+    - Creates UsernamePasswordAuthenticationToken with user details and authorities
+    - Sets authentication details using WebAuthenticationDetailsSource
+*/
 // @Component
 @RequiredArgsConstructor
 public class JwtFilter { //extends OncePerRequestFilter {
