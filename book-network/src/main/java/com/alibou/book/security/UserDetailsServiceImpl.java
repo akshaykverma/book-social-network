@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * by another authentication mechanism in the current configuration (possibly JWT or Keycloak as mentioned
  * in the project documentation).</p>
  */
-// @Service
+@Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository repository;

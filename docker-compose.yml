@@ -5,10 +5,11 @@ services:
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
-      PGDATA: /var/lib/postgresql/data
+#      PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: book_social_network
     volumes:
-      - postgres:/data/postgres
+      - pgdata:/var/lib/postgresql/data
+#      - ./db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
     networks:
@@ -20,24 +21,24 @@ services:
     ports:
       - 1080:1080
       - 1025:1025
-  keycloak:
-    container_name: keycloak-bsn
-    image: quay.io/keycloak/keycloak:24.0.2
-    ports:
-      - 9090:8080
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    networks:
-      - spring-demo
-    command:
-      - "start-dev"
+#  keycloak:
+#    container_name: keycloak-bsn
+#    image: quay.io/keycloak/keycloak:24.0.2
+#    ports:
+#      - 9090:8080
+#    environment:
+#      KEYCLOAK_ADMIN: admin
+#      KEYCLOAK_ADMIN_PASSWORD: admin
+#    networks:
+#      - spring-demo
+#    command:
+#      - "start-dev"
 networks:
   spring-demo:
     driver: bridge
 
 volumes:
-  postgres:
+  pgdata:
     driver: local
-  keycloak:
-    driver: local
+#  keycloak:
+#    driver: local

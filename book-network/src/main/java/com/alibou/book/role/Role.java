@@ -26,9 +26,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-// @Entity
-// @Table(name = "role")
-// @EntityListeners(AuditingEntityListener.class)
+ @Entity
+ @Table(name = "role")
+ @EntityListeners(AuditingEntityListener.class)
 public class Role {
 
     @Id
@@ -38,6 +38,9 @@ public class Role {
     private String name;
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
+    /*Prevents circular references during JSON serialization API response (User → Role → User → ...)
+    Does not happen in Hibernate as below is lazy loaded.
+    * */
     private List<User> user;
 
     @CreatedDate

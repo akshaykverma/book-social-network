@@ -38,9 +38,9 @@ import static jakarta.persistence.FetchType.EAGER;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-// @Entity
-// @Table(name = "_user")
-// @EntityListeners(AuditingEntityListener.class)
+ @Entity
+ @Table(name = "_user")
+ @EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails, Principal {
 
     @Id
@@ -54,12 +54,18 @@ public class User implements UserDetails, Principal {
     private String password;
     private boolean accountLocked;
     private boolean enabled;
-    @ManyToMany(fetch = EAGER)
-    private List<Role> roles;
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
-    @OneToMany(mappedBy = "user")
-    private List<BookTransactionHistory> histories;
+//    @OneToMany(mappedBy = "user")
+//    private List<BookTransactionHistory> histories;
+
+    /*This is a common pattern in security-related domain models where:
+    You often need a user's roles for authorization decisions (hence EAGER loading)
+    You rarely need to know all users who have a particular role (hence @JsonIgnore)
+    Useful for security checks that need role information without additional queries
+    */
+    @ManyToMany(fetch = EAGER)
+    private List<Role> roles;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

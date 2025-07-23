@@ -57,6 +57,7 @@ public class EmailService {
         helper.setTo(to);
         helper.setSubject(subject);
 
+        // Spring automatically checks the name in resources/templates folder for any matching template name
         String template = templateEngine.process(templateName, context);
 
         helper.setText(template, true);

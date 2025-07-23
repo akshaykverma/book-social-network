@@ -21,8 +21,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    // private final JwtFilter jwtAuthFilter;
-    // private final AuthenticationProvider authenticationProvider;
+     private final JwtFilter jwtAuthFilter;
+     private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationService authenticationService) throws Exception {
@@ -47,18 +47,16 @@ public class SecurityConfig {
                                 .anyRequest()
                                     .authenticated()
                 )
-/*
                 // Configure session management to be stateless (no session tracking)
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 // Set the authentication provider that will validate credentials
                 .authenticationProvider(authenticationProvider)
                 // Add JWT filter before the standard username/password authentication filter
                 // to process JWT tokens before attempting username/password auth
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-*/
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-                .oauth2ResourceServer(auth ->
-                        auth.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
+//                .oauth2ResourceServer(auth ->
+//                        auth.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
 
 
         return http.build();
