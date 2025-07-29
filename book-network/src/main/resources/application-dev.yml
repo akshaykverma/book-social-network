@@ -34,6 +34,13 @@ spring:
         jwt:
           issuer-uri: "http://localhost:9090/realms/book-social-network"
 application:
+  security:
+    jwt:
+      secret-key: fa470196aa0be7b17a51e41899c8f9705107a58f45609dd0d1850020584c624a
+      expiration: 86400000 # a day
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
   file:
     uploads:
       photos-output-path: ./uploads

@@ -92,7 +92,7 @@ public class AuthenticationService {
                 .enabled(false)
                 .roles(List.of(userRole))
                 .build();
-        //userRepository.save(user);
+        userRepository.save(user);
         sendValidationEmail(user);
     }
 

@@ -5,11 +5,10 @@ services:
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
-#      PGDATA: /var/lib/postgresql/data
+      PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: book_social_network
     volumes:
-      - pgdata:/var/lib/postgresql/data
-#      - ./db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres:/data/postgres
     ports:
       - 5432:5432
     networks:
@@ -38,7 +37,7 @@ networks:
     driver: bridge
 
 volumes:
-  pgdata:
+  postgres:
     driver: local
 #  keycloak:
 #    driver: local

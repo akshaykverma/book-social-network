@@ -33,8 +33,8 @@ public class Book extends BaseEntity {
      private User owner;
     @OneToMany(mappedBy = "book")
     private List<Feedback> feedbacks;
-    @OneToMany(mappedBy = "book")
-    private List<BookTransactionHistory> histories;
+//    @OneToMany(mappedBy = "book")
+//    private List<BookTransactionHistory> histories;
 
     @Transient
     public double getRate() {

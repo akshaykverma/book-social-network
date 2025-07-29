@@ -31,12 +31,12 @@ Private Claims: Custom claims created to share information between parties that 
 @Service
 public class JwtService {
     /* Secret key used for signing JWT tokens, loaded from application properties */
-//    @Value("${application.security.jwt.secret-key}")
-    private String secretKey = "secret123";
+    @Value("${application.security.jwt.secret-key}")
+    private String secretKey;
     
     /* Token expiration time in milliseconds, loaded from application properties  */
-//    @Value("${application.security.jwt.expiration}")
-    private long jwtExpiration = 12233;
+    @Value("${application.security.jwt.expiration}")
+    private long jwtExpiration;
 
     /*
      * Extracts the username (subject) from a JWT token
